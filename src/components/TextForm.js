@@ -46,9 +46,11 @@ export default function TextForm(props) {
   };
 
   const handleExtraSpaces = () => {
-    let reg = /\s+/g;
-    let newText = text.replace(reg, " ").trim();
-    setText(newText);
+    // let reg = /\s+/g;
+    // let newText = text.replace(reg, " ").trim();
+    // setText(newText);
+    let newText = text.split(/[ ]+/);
+    setText(newText.join(" "));
     if(text==="")
       props.showAlert("Enter some text to continue!", "warning");
     else
@@ -68,7 +70,7 @@ export default function TextForm(props) {
         <div className="mb-3">
           <textarea
             style={{
-              backgroundColor: props.mode === "light" ? "white" : "gray",
+              backgroundColor: props.mode === "light" ? "white" : "#36366d",
               color: props.mode === "light" ? "black" : "white",
             }}
             className="form-control"
@@ -79,19 +81,19 @@ export default function TextForm(props) {
             rows="8"
           ></textarea>
         </div>
-        <button className="btn btn-primary mx-1" onClick={handleUpClick}>
+        <button className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>
           Convert to UPPERCASE
         </button>
-        <button className="btn btn-primary mx-1" onClick={handleDownClick}>
+        <button className="btn btn-primary mx-1 my-1" onClick={handleDownClick}>
           Convert to lowercase
         </button>
-        <button className="btn btn-primary mx-1" onClick={handleSpecialChars}>
+        <button className="btn btn-primary mx-1 my-1" onClick={handleSpecialChars}>
           Remove SpecialCharacters
         </button>
-        <button className="btn btn-primary mx-1" onClick={handleCLearText}>
+        <button className="btn btn-primary mx-1 my-1" onClick={handleCLearText}>
           Clear Text
         </button>
-        <button className="btn btn-primary mx-1" onClick={handleExtraSpaces}>
+        <button className="btn btn-primary mx-1 my-1" onClick={handleExtraSpaces}>
           Remove ExtraSpaces
         </button>
       </div>
@@ -107,11 +109,11 @@ export default function TextForm(props) {
         {/* OR */}
 
         <p>
-          {text.length === 0 ? 0 : text.split(/[\s][\w]/).length} words &{" "}
+          {text.split(" ").filter((element)=>{return element.length!==0}).length} words &{" "}
           {text.length} characters
         </p>
         <h1>Preview</h1>
-        <p>{text.length>0 ? text : "Enter something in the textbox above to preview it here"}</p>
+        <p>{text.length>0 ? text : "Nothing to preview!"}</p>
         <hr />
       </div>
     </>
