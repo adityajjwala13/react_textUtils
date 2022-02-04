@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 
 export default function TextForm(props) {
-  const [text, setText] = useState(""); //text is the state
-  // text="new text";        //Wrong way to change the state
-  // setText("new text");   //Correct way to  change the state
-
+  const [text, setText] = useState(""); 
+  
   const handleUpClick = () => {
     let newText = text.toUpperCase();
     setText(newText);
@@ -46,9 +44,6 @@ export default function TextForm(props) {
   };
 
   const handleExtraSpaces = () => {
-    // let reg = /\s+/g;
-    // let newText = text.replace(reg, " ").trim();
-    // setText(newText);
     let newText = text.split(/[ ]+/);
     setText(newText.join(" "));
     if(text==="")
@@ -57,9 +52,6 @@ export default function TextForm(props) {
       props.showAlert("Removed ExtraSpaces!", "success");
   };
 
-  // let textSummary = () => {
-  //   return (text.length===0)? 0:text.split(/[\s][\w]/).length;
-  // }
   return (
     <>
       <div
@@ -102,12 +94,6 @@ export default function TextForm(props) {
         style={{ color: props.mode === "light" ? "black" : "white" }}
       >
         <h1>Your Text Summary</h1>
-        {/* <p>
-          {textSummary()} words & {text.length} characters
-        </p>  */}
-
-        {/* OR */}
-
         <p>
           {text.split(" ").filter((element)=>{return element.length!==0}).length} words &{" "}
           {text.length} characters
